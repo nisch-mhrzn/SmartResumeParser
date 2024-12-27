@@ -1,16 +1,159 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Page Title</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume Screening AI System</title>
+  <link rel="icon" href="image.png">
+
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #013a5c;
+      color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #f9bc60;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    ul li {
+      margin: 10px 0;
+      padding: 10px;
+      background-color: #1d6076;
+      border-radius: 5px;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    input[type="file"] {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 2px dashed #f9bc60;
+      border-radius: 5px;
+      background-color: #ffffff;
+      cursor: pointer;
+    }
+
+    input[type="submit"] {
+      padding: 10px 25px;
+      background-color: #f9bc60;
+      color: #013a5c;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #e9a750;
+    }
+
+    p {
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background-color: #f9bc60;
+      margin: 20px 0;
+    }
+  </style>
 </head>
-
 <body>
-    <h2>Welcome To GFG</h2>
+  <div class="container">
+    <h1>Resume Screening AI System</h1>
     <p>
-        Default code has been
-        loaded into the Editor.
+      This system supports TXT and PDF files for upload and provides the following features:
     </p>
-</body>
+    <ul>
+      <li>Resume Categorization</li>
+      <li>Job Recommendation</li>
+      <li>Resume Parsing (Information Extraction)</li>
+    </ul>
+  </div>
 
+  <div class="container">
+    <h2>Upload Your Resume</h2>
+    <form action="/pred" method="post" enctype="multipart/form-data">
+      <label for="resume">Upload your resume:</label>
+      <input type="file" id="resume" name="resume" accept=".pdf, .txt" required>
+      <input type="submit" value="Submit">
+    </form>
+
+    {% if message %}
+      <p class="text-center">{{ message }}</p>
+    {% endif %}
+
+    {% if predicted_category %}
+      <hr>
+      <p class="text-center"><b>Category:</b> {{ predicted_category }}</p>
+      <p class="text-center"><b>Recommended Job:</b> {{ recommended_job }}</p>
+
+      <hr>
+      <h2 class="text-center">Extracted Information</h2>
+      <p class="text-center"><b>Name:</b> {{ name }}</p>
+      <p class="text-center"><b>Phone No:</b> {{ phone }}</p>
+      <p class="text-center"><b>Email:</b> {{ email }}</p>
+
+      {% if extracted_skills %}
+        <h2 class="text-center">Skills</h2>
+        <ul>
+          {% for skill in extracted_skills %}
+            <li>{{ skill }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-center">No skills found.</p>
+      {% endif %}
+
+      {% if extracted_education %}
+        <h2 class="text-center">Education</h2>
+        <ul>
+          {% for edu in extracted_education %}
+            <li>{{ edu }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-center">No education found.</p>
+      {% endif %}
+    {% endif %}
+  </div>
+</body>
 </html>
