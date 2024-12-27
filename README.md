@@ -32,8 +32,8 @@ The **Resume Parser** project is designed to extract useful information from res
 ### Steps:
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/resume-parser.git
-   cd resume-parser
+   git clone https://github.com/nisch-mhrzn/SmartResumeParser.git
+   cd SmartResumeParser
    ```
 2. Install dependencies:
    ```bash
